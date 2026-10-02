@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Enemy extends Sprite {
     private float speed;
@@ -18,11 +19,12 @@ public class Enemy extends Sprite {
         speed= newSpeed;
         health= newHealth;
         damage = newdamage;
+        name = newname;
         hitbox = new Rectangle(startX, startY, hitboxwidth, hitboxhight);
         setPosition(startX, startY);
     } 
     @Override
-    public void setPosition(float x, float y) {
+    public void setPosition(float x, float y); {
         super.setPosition(x, y);
         hitbox.setPosition(x, y);
     }
@@ -30,7 +32,7 @@ public class Enemy extends Sprite {
         return hitbox;
     }
      public static Enemy getCuber(TextureRegion texture, float x, float y);{
-         return new Enemy(texture, x, y, Cuber, 150f, 20, 5, 25, 25)
+         return new Enemy(texture, x, y, "Cuber" , 150f, 20, 5, 25, 25);
          
 }
 
