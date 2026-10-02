@@ -9,15 +9,18 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Enemy extends Sprite {
     private float speed;
+    private int damage;
     private int health;
     private Rectangle hitbox;
-    public Enemy(Texture texture, float startX, float startY, float newSpeed, int newHealth, float hitboxhight, float hitboxwidth) {
+    private String name;
+    public Enemy(Texture texture, float startX, float startY, String newname, float newSpeed, int newHealth, int newdamage, float hitboxhight, float hitboxwidth) {
         super(texture);
         speed= newSpeed;
         health= newHealth;
+        damage = newdamage;
         hitbox = new Rectangle(startX, startY, hitboxwidth, hitboxhight);
         setPosition(startX, startY);
-    }
+    } 
     @Override
     public void setPosition(float x, float y) {
         super.setPosition(x, y);
@@ -25,5 +28,9 @@ public class Enemy extends Sprite {
     }
     public Rectangle getRectangle(){
         return hitbox;
+    }
+     public static Enemy getCuber(TextureRegion texture, float x, float y);{
+         return new Enemy(texture, x, y, Cuber, 150f, 20, 5, 25, 25)
+         
 }
 
