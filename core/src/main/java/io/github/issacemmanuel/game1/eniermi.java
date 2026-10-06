@@ -14,7 +14,8 @@ public class Enemy extends Sprite {
     private int health;
     private Rectangle hitbox;
     private String name;
-    public Enemy(Texture texture, float startX, float startY, String newname, float newSpeed, int newHealth, int newdamage, float hitboxhight, float hitboxwidth) {
+    private float knowckback
+    public Enemy(Texture texture, float startX, float startY, String newname, float newSpeed, int newHealth, int newdamage, float knockback, float hitboxhight, float hitboxwidth) {
         super(texture);
         speed= newSpeed;
         health= newHealth;
@@ -32,7 +33,7 @@ public class Enemy extends Sprite {
         return hitbox;
     }
      public static Enemy getCuber(TextureRegion texture, float x, float y);{
-         return new Enemy(texture, x, y, "Cuber" , 150f, 20, 5, 25, 25);
+         return new Enemy(texture, x, y, "Cuber" , 150f, 20, 5, 10, 25, 25);
          
 }
 
