@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Enemy extends Sprite {
+public class Enemy extends actor {
     private float speed;
     private int damage;
     private int health;
