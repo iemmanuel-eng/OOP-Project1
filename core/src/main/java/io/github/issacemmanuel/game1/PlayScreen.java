@@ -22,6 +22,9 @@ public class PlayScreen extends ScreenAdapter{
          private static final float TIME_STEP = 1 / 60f;
          private float physicsAccumulator = 0f;
 
+        private Enemy cuber;
+        private Texture cuberTexture;
+
      public void stepPhysicsSimulation(float delta) {
           float frametime = Math.min(delta, 0.25f);
           physicsAccumulator += frametime;
