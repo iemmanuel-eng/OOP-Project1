@@ -84,6 +84,11 @@ public class PlayScreen extends ScreenAdapter{
           world = new World(new Vector2(0f,-20f), true);
           player1 = new Player(new Vector2(image.getWidth() * 4,image.getHeight() * 2), image, world);
           stage.addActor(player1);
+         
+          cuberTexture = new Texture("cuber (1)-frame0.png");
+          cuber = Enemy.getCuber(cuberTexture, 300, 200);
+          stage.addActor(cuber);
+         
           Ground.makeGround(image.getWidth() * 4, 0, world, 8 * Player.PPM, 10);
           speed = 20f;
           InputMultiplexer multiplexer = new InputMultiplexer();
