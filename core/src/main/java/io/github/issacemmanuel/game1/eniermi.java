@@ -14,9 +14,10 @@ public class Enemy extends Actor {
     private int health;
     private Rectangle hitbox;
     private String name;
-    private float knowckback
+    private float knowckback;
+    private Texture texture;
     public Enemy(Texture texture, float startX, float startY, String newname, float newSpeed, int newHealth, int newdamage, float knockback, float hitboxhight, float hitboxwidth) {
-        super(texture);
+        this.texture = texture;
         speed= newSpeed;
         health= newHealth;
         damage = newdamage;
@@ -25,14 +26,18 @@ public class Enemy extends Actor {
         setPosition(startX, startY);
     } 
     @Override
-    public void setPosition(float x, float y); {
+    public void setPosition(float x, float y) {
         super.setPosition(x, y);
         hitbox.setPosition(x, y);
+    }
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(texture, getX(), getY());
     }
     public Rectangle getRectangle(){
         return hitbox;
     }
-     public static Enemy getCuber(TextureRegion texture, float x, float y);{
+     public static Enemy getCuber(TextureRegion texture, float x, float y){
          return new Enemy(texture, x, y, "Cuber" , 150f, 20, 5, 10, 25, 25);
          
 }
