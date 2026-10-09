@@ -86,7 +86,7 @@ public class PlayScreen extends ScreenAdapter{
           stage.addActor(player1);
          
           cuberTexture = new Texture("cuber (1)-frame0.png");
-          cuber = Enemy.getCuber(cuberTexture, 300, 200);
+          cuber = Enemy.getCuber(cuberTexture, 300, 200,world);
           stage.addActor(cuber);
          
           Ground.makeGround(image.getWidth() * 4, 0, world, 8 * Player.PPM, 10);
@@ -116,6 +116,9 @@ public class PlayScreen extends ScreenAdapter{
           if(image != null) {
                image.dispose();
           }
+          if(cuberTexture != null) {
+                cuberTexture.dispose();
+}
      }
      @Override
      public void resize(int width, int height) {
