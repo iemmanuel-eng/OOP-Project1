@@ -23,5 +23,23 @@ public class Ground {
           groundShape.dispose();
      }
 
-     
+    public static void makeGround(float groundX, float groundY, World world, float width, float height, boolean portal) {
+          BodyDef groundDef = new BodyDef();
+
+          groundDef.type = BodyDef.BodyType.StaticBody;
+          groundDef.position.set(groundX / Player.PPM, groundY / Player.PPM);
+          Body groundBody = world.createBody(groundDef);
+          PolygonShape groundShape = new PolygonShape();
+          float halfWidth = width / Player.PPM;
+          float halfHeight = height / Player.PPM;
+          groundShape.setAsBox(halfWidth, halfHeight);
+          
+          FixtureDef groundFix = new FixtureDef();
+          groundFix.shape = groundShape;
+          groundFix.friction = 0.4f;
+          
+          Fixture fixture = groundBody.createFixture(groundFix);
+          fixture.setUserData("Portal");
+          groundShape.dispose();
+     }
 }
