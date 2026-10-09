@@ -1,0 +1,23 @@
+Idle_Animation.png
+size: 64, 114
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+pma: false
+idle
+  bounds: 1, 77, 30, 36
+  offsets: 3, 0, 38, 36
+  index: 1
+idle
+  bounds: 1, 1, 38, 36
+  index: 2
+idle
+  bounds: 1, 39, 38, 36
+  index: 3
+idle
+  bounds: 1, 1, 38, 36
+  index: 4
+idle
+  bounds: 33, 77, 30, 36
+  offsets: 3, 0, 38, 36
+  index: 5
