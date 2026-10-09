@@ -1,0 +1,29 @@
+Background1 Layers/Background1.pixil
+Background1 Layers/background4.png
+Background1 Layers/pixil-frame-0.png
+Background2.png
+Background3.png
+Idle Animation/CharacterIdleAnimation.pixil
+Idle Animation/idle_1.png
+Idle Animation/idle_2.png
+Idle Animation/idle_3.png
+Idle Animation/idle_4.png
+Idle Animation/idle_5.png
+Idle_Animation.atlas
+Idle_Animation.png
+Walking Animation/CharacterAnimation1.pixil
+Walking Animation/walkin_2.png
+Walking Animation/walking_1.png
+Walking Animation/walking_3.png
+Walking Animation/walking_4.png
+Walking Animation/walking_5.png
+Walking Animation/walking_6.png
+Walking_Animation.atlas
+Walking_Animation.png
+ui/font-list.fnt
+ui/font-subtitle.fnt
+ui/font-window.fnt
+ui/font.fnt
+ui/uiskin.atlas
+ui/uiskin.json
+ui/uiskin.png

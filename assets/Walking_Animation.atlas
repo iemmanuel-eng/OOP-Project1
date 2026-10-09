@@ -1,0 +1,25 @@
+Walking_Animation.png
+size: 203, 28
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+pma: false
+walkin
+  bounds: 1, 1, 32, 26
+  index: 2
+walking
+  bounds: 35, 1, 32, 26
+  index: 1
+walking
+  bounds: 69, 1, 32, 26
+  index: 3
+walking
+  bounds: 103, 1, 32, 26
+  index: 4
+walking
+  bounds: 137, 1, 32, 26
+  index: 5
+walking
+  bounds: 171, 1, 31, 26
+  offsets: 0, 0, 32, 26
+  index: 6

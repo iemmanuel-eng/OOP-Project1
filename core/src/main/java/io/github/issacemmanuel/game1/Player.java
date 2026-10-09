@@ -1,7 +1,10 @@
 package io.github.issacemmanuel.game1;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -11,15 +14,23 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Player extends Actor {
-     final private Texture texture;
      final private Body playerBody;
-     final private World world;
+     public boolean looping = true;
+     public boolean isFacingLeft = false;
+     public TextureRegion currentFrame;
+     public TextureAtlas atlas;
+     public Animation<TextureRegion> runningAnimation;
+     public Batch batch;
+     public float offsetX;
+     float elapsedTime;
+
 
      public static float PPM = 100.0f;
 
-     public Player(Vector2 startPosition, Texture playerTexture, World world) {
-          this.texture  = playerTexture;
-          this.world = world;
+     public Player(Vector2 startPosition, World world, String textureAtlasPath) {
+          atlas = new TextureAtlas(Gdx.files.internal(textureAtlasPath));
+          runningAnimation = new Animation<>(.5f, atlas.findRegions("idle"));
+          
 
           BodyDef bdef = new BodyDef();
           bdef.type = BodyDef.BodyType.DynamicBody;
@@ -27,7 +38,7 @@ public class Player extends Actor {
           playerBody = world.createBody(bdef);
 
           PolygonShape shape = new PolygonShape();
-          shape.setAsBox((texture.getWidth() / 2f) / PPM, (texture.getHeight() / 2f) / PPM);
+          shape.setAsBox((20f / 2f) / PPM, (36f / 2f) / PPM);
 
           FixtureDef fdef = new FixtureDef();
           fdef.shape = shape;
@@ -35,7 +46,16 @@ public class Player extends Actor {
           shape.dispose();
 
           playerBody.setUserData(this);
-          setBounds(startPosition.x, startPosition.y, texture.getWidth(), texture.getHeight());
+          setBounds(startPosition.x + 40f, startPosition.y, 20f, 36f);
+
+          BodyDef footbox = new BodyDef();
+          footbox.type = BodyDef.BodyType.DynamicBody;
+          footbox.position.set(startPosition.x / PPM, startPosition.y / PPM);
+
+          PolygonShape footshape = new PolygonShape();
+          footshape.setAsBox((20f /2f) / PPM, (36f / 2f) / PPM );
+
+          
      }
      @Override
      public void act(float delta) {
@@ -46,11 +66,47 @@ public class Player extends Actor {
            setRotation((float) Math.toDegrees(playerBody.getAngle()));
      }
      @Override 
-     public void draw(Batch batch, float parentAlpha) {
+     public void draw(Batch playerBatch, float parentAlpha) {
+          batch = playerBatch;
           super.draw(batch, parentAlpha);
-          batch.draw(texture, getX(), getY(), getOriginX(), getOriginY(), getWidth(),getHeight(), getScaleX(), getScaleY(), getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
+          elapsedTime += Gdx.graphics.getDeltaTime();
+          currentFrame = runningAnimation.getKeyFrame(elapsedTime, looping);
+          if(isFacingLeft && !currentFrame.isFlipX()) {
+               currentFrame.flip(true, false);
+          }
+          if(!isFacingLeft && currentFrame.isFlipX()) {
+               currentFrame.flip(true, false);
+          }
+          if (currentFrame instanceof TextureAtlas.AtlasRegion) {
+               TextureAtlas.AtlasRegion region = (TextureAtlas.AtlasRegion) currentFrame;
+               offsetX = region.offsetX;
+               if(currentFrame.isFlipX()) {
+                    offsetX = region.originalWidth - region.packedWidth - region.offsetX;
+               }
+               batch.draw(
+                    region, getX()-13f + offsetX, 
+                    getY() + region.offsetY, getOriginX() - offsetX,
+                    getOriginY() - region.offsetY,
+                    region.packedWidth,
+                    region.packedHeight, getScaleX(), getScaleY(), getRotation()
+               );
+          }
+          else{
+               batch.draw(currentFrame, getX(), getY(), 102.4f, 128.5f);
+          }
+          
      }
      public Body getPlayerBody() {
           return playerBody;
+     }
+     public void setIsFacingLeft(boolean isFacingLeft) {
+          this.isFacingLeft = isFacingLeft;
+     }
+     public void setLooping(boolean islooping) {
+          looping = islooping;
+     }
+     public void setRunningAnimation(float frameDuration, String keyWord, String newTextureAtlasPath) {
+          atlas = new TextureAtlas(Gdx.files.internal(newTextureAtlasPath));
+          this.runningAnimation = new Animation<>(frameDuration, atlas.findRegions(keyWord));
      }
 }
