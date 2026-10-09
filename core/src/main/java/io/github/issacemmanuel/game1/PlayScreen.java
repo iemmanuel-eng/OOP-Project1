@@ -34,6 +34,9 @@ public class PlayScreen extends ScreenAdapter{
          public static int transitionQueued;
          private int stageNumber = 1;
 
+        private Enemy cuber;
+        private Texture cuberTexture;
+
      public void stepPhysicsSimulation(float delta) {
           float frametime = Math.min(delta, 0.25f);
           physicsAccumulator += frametime;
@@ -129,6 +132,13 @@ public class PlayScreen extends ScreenAdapter{
 
           stage.addActor(background);
           stage.addActor(player1);
+         
+          cuberTexture = new Texture("cuber (1)-frame0.png");
+          cuber = Enemy.getCuber(cuberTexture, 300, 200,world);
+          stage.addActor(cuber);
+         
+          Ground.makeGround(image.getWidth() * 4, 0, world, 8 * Player.PPM, 10);
+          speed = 20f;
           stage.addActor(foreground);
           debugRenderer = new Box2DDebugRenderer();
 
@@ -219,6 +229,9 @@ public class PlayScreen extends ScreenAdapter{
           if(debugRenderer != null) {
                debugRenderer.dispose();
           }
+          if(cuberTexture != null) {
+                cuberTexture.dispose();
+}
      }
      @Override
      public void resize(int width, int height) {
